@@ -79,33 +79,39 @@ $ sudo ./bin/startup.sh # 启动
 
 `Server` 项的配置如下：
 
-`Name`，设服务器名称
-`Application server`, 点击Configure，设置Tomcat服务器
-`Open broswer`, 打开的URL地址默认是http://localhost:8080/。一般情况下，在Deployment设置工程发布目录，就会自动改变。
-`VM Option`, 如果出现乱码问题，设置参数-Dfile.encoding=UTF8
+- `Name`，设服务器名称
+- `Application server`, 点击Configure，设置Tomcat服务器
+- `Open broswer`, 打开的URL地址默认是http://localhost:8080/。一般情况下，在Deployment设置工程发布目录，就会自动改变。
+- `VM Option`, 如果出现乱码问题，设置参数-Dfile.encoding=UTF8
 
 `Deployment`项的配置如下:
-`+` 号 -> Artifact... -> 选择发布的工程
+
+- `+` 号 -> Artifact... -> 选择发布的工程
 
 ## Mac启用80端口说明
 
 Mac默认禁止1024以下的端口，需要通过PF防火墙配置，添加80端口。
 
 创建防火墙配置文件
+
 ```bash
 $ sudo vim /etc/pf.anchors/devel
 ```
+
 添加80端口对8080端口的访问许可，内容如下：
+
 ```
 rdr pass on lo0 inet proto tcp from any to any port 80 -> 127.0.0.1 port 8080
 ```
 
 修改配置文件
+
 ```bash
 $ sudo vim /etc/pf.conf
 ```
 
 修改内容如下
+
 ```
 scrub-anchor "com.apple/*"
 nat-anchor "com.apple/*"
@@ -117,7 +123,8 @@ load anchor "com.apple" from "/etc/pf.anchors/com.apple"
 load anchor "devel" from "/etc/pf.anchors/devel" #添加配置
 ```
 
-立即生效.++**生效后，无需配置Ngix。**++
+立即生效。**生效后，无需配置Ngix。**
+
 ```bash
 $ sudo pfctl -ef /etc/pf.conf
 ```
