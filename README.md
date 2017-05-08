@@ -58,7 +58,7 @@ $ mvn package -Dmaven.test.skip=true #重新编译
 执行以下命令将wat包部署到tomcat下
 
 ```bash
-cp target/spring-rest-sample.war /path/to/tomcat/webapps/sample.war
+$ cp target/spring-rest-sample-1.0.0-SNAPSHOT.war /path/to/tomcat/webapps/conference.war
 ```
 
 #### 启动tomcat
@@ -82,7 +82,7 @@ $ sudo ./bin/startup.sh # 启动
 - `Name`，设服务器名称
 - `Application server`, 点击Configure，设置Tomcat服务器
 - `Open broswer`, 打开的URL地址默认是http://localhost:8080/。一般情况下，在Deployment设置工程发布目录，就会自动改变。
-- `VM Option`, 如果出现乱码问题，设置参数-Dfile.encoding=UTF8
+- `VM Option`, 如果出现乱码问题，设置参数 `-Dfile.encoding=UTF8`
 
 `Deployment`项的配置如下:
 
