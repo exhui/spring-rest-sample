@@ -2,6 +2,7 @@ package vip.maxhub.web.sample.config;
 
 import com.google.common.base.Predicate;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.RequestHandlerSelectors;
@@ -19,8 +20,9 @@ import static springfox.documentation.builders.PathSelectors.regex;
 /**
  * Created by jinlei on 2017/5/16.
  */
+@Configuration
 @EnableSwagger2
-//@Profile(value = {"dev", "staging"})
+@Profile(value = {"dev", "staging"})
 public class SwaggerConfig {
 
     @Bean

@@ -281,16 +281,16 @@
         </dependency>
 
         <!--<dependency>-->
-            <!--<groupId>io.springfox</groupId>-->
-            <!--<artifactId>springfox-swagger-ui</artifactId>-->
-            <!--<version>${springfox.version}</version>-->
+        <!--<groupId>io.springfox</groupId>-->
+        <!--<artifactId>springfox-swagger-ui</artifactId>-->
+        <!--<version>${springfox.version}</version>-->
         <!--</dependency>-->
 
         <!--<dependency>-->
-            <!--<groupId>io.springfox</groupId>-->
-            <!--<artifactId>springfox-staticdocs</artifactId>-->
-            <!--<version>${springfox.version}</version>-->
-            <!--<scope>test</scope>-->
+        <!--<groupId>io.springfox</groupId>-->
+        <!--<artifactId>springfox-staticdocs</artifactId>-->
+        <!--<version>${springfox.version}</version>-->
+        <!--<scope>test</scope>-->
         <!--</dependency>-->
 
         <!--mdoelmapper-->
@@ -495,6 +495,10 @@
             <activation>
                 <activeByDefault>true</activeByDefault>
             </activation>
+            <properties>
+                <log4j.level>DEBUG</log4j.level>
+                <spring.profiles.active>dev</spring.profiles.active>
+            </properties>
             <build>
                 <resources>
                     <resource>
@@ -507,6 +511,10 @@
 
         <profile>
             <id>staging</id>
+            <properties>
+                <log4j.level>DEBUG</log4j.level>
+                <spring.profiles.active>dev</spring.profiles.active>
+            </properties>
             <build>
                 <resources>
                     <resource>
@@ -519,6 +527,10 @@
 
         <profile>
             <id>prod</id>
+            <properties>
+                <log4j.level>INFO</log4j.level>
+                <spring.profiles.active>dev</spring.profiles.active>
+            </properties>
             <build>
                 <resources>
                     <resource>

@@ -154,7 +154,10 @@ $ sudo vim /System/Library/LaunchDaemons/com.apple.pfctl.plist
 
 ### app.properties
 
-app配置文件，目前没有任何参数。
+```ini
+# 运行环境配置
+spring.profiles.active=@spring.profiles.active@
+```
 
 ### database.properties
 
@@ -228,20 +231,34 @@ IDEA打开工程时会自动提示是否是Maven、是否导入JPA配置文件�
 ### 5. 开发文档
 
 - UML文档用StartUML编写。原始文件在doc_src目录。可直接阅读的格式是JPG图片，在doc目录。不输出PDF，是由于StartUML输出的PDF显示中文乱码。
-- API文档用Swagger自动生成。输出在doc目录。
+- API文档用Swagger自动生成。具体看API编辑指南。
 
-### 6. 资源文件配置
+### 6. 运行环境配置
+
+#### 6.1 在代码中使用`@Profile`注解配置
+
+本项目只配置了一条，可以参考`swaggerConfig.java`。下面含义是只支持开发和测试环境。
+
+```java
+@Profile(value = {"dev", "staging"})
+```
+
+#### 6.2 在IDEA选择不同的运行环境
 
 一般情况下，我们需要根据不同的运行环境，做不同的资源文件配置。所以在`pom.xml`有如下配置:
 
 ```xml
-<profiles>
+    <profiles>
 
         <profile>
             <id>dev</id>
             <activation>
                 <activeByDefault>true</activeByDefault>
             </activation>
+            <properties>
+                <log4j.level>DEBUG</log4j.level>
+                <spring.profiles.active>dev</spring.profiles.active>
+            </properties>
             <build>
                 <resources>
                     <resource>
@@ -254,6 +271,10 @@ IDEA打开工程时会自动提示是否是Maven、是否导入JPA配置文件�
 
         <profile>
             <id>staging</id>
+            <properties>
+                <log4j.level>DEBUG</log4j.level>
+                <spring.profiles.active>dev</spring.profiles.active>
+            </properties>
             <build>
                 <resources>
                     <resource>
@@ -266,6 +287,10 @@ IDEA打开工程时会自动提示是否是Maven、是否导入JPA配置文件�
 
         <profile>
             <id>prod</id>
+            <properties>
+                <log4j.level>INFO</log4j.level>
+                <spring.profiles.active>dev</spring.profiles.active>
+            </properties>
             <build>
                 <resources>
                     <resource>
@@ -277,6 +302,10 @@ IDEA打开工程时会自动提示是否是Maven、是否导入JPA配置文件�
         </profile>
     </profiles>
 ```
+
+#### 6.3 在IDEA选择不同的运行环境
+
+打开编辑栏最右侧的导航栏，一般被缩略成标签样式。其中有一个标签是`Maven Projects`。打开后，就可以发现配置好的profiles，可以选择自己需要的profile。
 
 ## API文档编辑指南
 
@@ -301,7 +330,7 @@ http://127.0.0.1:8080/sample/v2/api-docs
 
 - NodeJS 6.x
 - NPM 3.x
-- Chrome
+- Chrome (不支持Safari)
 
 安装Swagger Editor命令如下
 
@@ -310,6 +339,7 @@ $ npm install -g http-server
 $ git clone https://github.com/swagger-api/swagger-editor.git
 $ cd swagger-editor
 $ npm install
+$ npm run build 
 $ http-server .
 ```
 
@@ -337,6 +367,7 @@ $ npm install -g http-server
 $ git clone https://github.com/swagger-api/swagger-ui.git
 $ cd swagger-ui
 $ npm install
+$ npm run build
 $ http-server dist
 ```
 
@@ -351,3 +382,5 @@ https://raw.githubusercontent.com/lordking/spring-rest-sample/master/doc_src/接
 ```
 http://petstore.swagger.io
 ```
+
+用Chrome 打开地址。由于Tomcat占用了8080端口，本机启动时会自动改为8081端口。
