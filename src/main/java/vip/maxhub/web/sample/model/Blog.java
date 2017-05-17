@@ -2,10 +2,7 @@ package vip.maxhub.web.sample.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
-import org.hibernate.annotations.UpdateTimestamp;
 
-import javax.persistence.*;
-import javax.validation.constraints.Size;
 import java.util.Date;
 
 /**

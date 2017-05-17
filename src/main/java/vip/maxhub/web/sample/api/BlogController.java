@@ -4,6 +4,10 @@ import javax.inject.Inject;
 import javax.validation.Valid;
 import java.util.List;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.validation.BindingResult;
@@ -24,7 +28,7 @@ import vip.maxhub.web.sample.validator.BlogFormValidator;
  * Created by jinlei on 2017/4/20.
  */
 @RestController
-@RequestMapping(Constants.URI_API + "/blog")
+@RequestMapping(Constants.URI_API + "/blogs")
 public class BlogController {
     private static final Logger log = LoggerFactory.getLogger(BlogController.class);
 
@@ -43,7 +47,7 @@ public class BlogController {
      * @param errResult
      * @return
      */
-    @RequestMapping(value = "/create", method = RequestMethod.POST)
+    @RequestMapping(method = RequestMethod.POST)
     public PrevalentMessage create(@RequestBody @Valid BlogForm form, BindingResult errResult) {
         if (errResult.hasErrors()) {
             throw ValidationExceptionUtils.build(errResult);
@@ -56,27 +60,11 @@ public class BlogController {
     }
 
     /**
-     * 查询一条
-     *
-     * @param id
-     * @return
-     */
-    @RequestMapping(value = "/one/{id}", method = RequestMethod.GET)
-    @ResponseBody
-    public Blog findOneById(@PathVariable("id") Long id) {
-
-        Blog blog = this.blogService.findOneById(id);
-
-        log.debug("created a new blog ==> " + blog);
-        return blog;
-    }
-
-    /**
      * 查询全部
      *
      * @return
      */
-    @RequestMapping(value = "/all", method = RequestMethod.GET)
+    @RequestMapping(method = RequestMethod.GET)
     @ResponseBody
     public List<Blog> findAll() {
 
@@ -87,6 +75,23 @@ public class BlogController {
     }
 
     /**
+     * 查询一条
+     *
+     * @param id
+     * @return
+     */
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    @ResponseBody
+    public Blog findOneById(@PathVariable("id") Long id) {
+
+        Blog blog = this.blogService.findOneById(id);
+
+        log.debug("created a new blog ==> " + blog);
+        return blog;
+    }
+
+
+    /**
      * 修改
      *
      * @param id
@@ -94,7 +99,7 @@ public class BlogController {
      * @param errResult
      * @return
      */
-    @RequestMapping(value = "/update/{id}", method = RequestMethod.PUT)
+    @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
     public PrevalentMessage update(@PathVariable("id") Long id, @RequestBody @Valid BlogForm form, BindingResult errResult) {
         if (errResult.hasErrors()) {
             throw ValidationExceptionUtils.build(errResult);
@@ -106,7 +111,7 @@ public class BlogController {
         return new PrevalentMessage("ok");
     }
 
-    @RequestMapping(value = "/delete/{id}", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     public PrevalentMessage delete(@PathVariable("id") Long id) {
 
         Boolean success = this.blogService.deleteOneById(id);

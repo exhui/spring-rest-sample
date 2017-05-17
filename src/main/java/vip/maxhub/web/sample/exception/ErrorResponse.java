@@ -8,15 +8,15 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  */
 public class ErrorResponse {
 
-    @JsonProperty(value = "error_code")
-    private final int errorCode;
+    @JsonProperty(value = "code")
+    private final int code;
 
     @JsonProperty(value = "message")
     private final String message;
 
     public ErrorResponse(RestException ex){
         String code = ex.getHttpStatus().toString() + ex.getReasonCode();
-        this.errorCode = Integer.parseInt(code);
+        this.code = Integer.parseInt(code);
         this.message = ex.getLocalizedMessage();
     }
 
@@ -35,8 +35,8 @@ public class ErrorResponse {
      * <p>
      * @return
      */
-    public int getErrorCode() {
-        return errorCode;
+    public int getCode() {
+        return code;
     }
 
     public String getMessage() {
@@ -46,7 +46,7 @@ public class ErrorResponse {
     @Override
     public String toString() {
         return "ErrorResponse{" +
-            "errorCode=" + errorCode +
+            "code=" + code +
             ", message='" + message + '\'' +
             '}';
     }

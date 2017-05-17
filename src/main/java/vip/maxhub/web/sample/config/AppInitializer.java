@@ -47,7 +47,8 @@ public class AppInitializer extends AbstractAnnotationConfigDispatcherServletIni
     @Override
     protected Class<?>[] getServletConfigClasses() {
         return new Class[]{
-            WebConfig.class
+            WebConfig.class,    //web.xml配置
+            SwaggerConfig.class  //RestAPI文档自动输出
         };
     }
 
