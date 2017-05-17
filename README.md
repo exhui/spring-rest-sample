@@ -319,8 +319,35 @@ $ http-server .
 http://127.0.0.1:8081/
 ```
 
-按如下步骤打开API文档
+点击`File`->`import URL`->输入如下地址打开API文档。
 
 ```
-File - > import File
+http://127.0.0.1:8080/sample/v2/api-docs
+```
+
+打开后，即可编辑、导出。
+
+
+### 4. 使用Swagger UI直接打开浏览
+
+安装Swagger UI命令如下
+
+```bash
+$ npm install -g http-server
+$ git clone https://github.com/swagger-api/swagger-ui.git
+$ cd swagger-ui
+$ npm install
+$ http-server dist
+```
+
+本项目已经编辑完成，所以安装完成后输入地址:
+
+```
+https://raw.githubusercontent.com/lordking/spring-rest-sample/master/doc_src/接口协议.yaml
+```
+
+如果不想安装，可以使用Swagger官方提供的演示网站打开:
+
+```
+http://petstore.swagger.io
 ```
