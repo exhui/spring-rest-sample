@@ -7,9 +7,9 @@ import org.springframework.security.authentication.encoding.PlaintextPasswordEnc
  * 加密处理
  * Created by jinlei on 2017/5/8.
  */
-public class EncryptionUtils {
+public class SecurityUtils {
 
-    private EncryptionUtils() {
+    private SecurityUtils() {
         throw new InstantiationError( "Must not instantiate this class" );
     }
 

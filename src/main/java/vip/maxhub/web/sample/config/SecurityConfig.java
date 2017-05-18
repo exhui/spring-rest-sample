@@ -1,23 +1,18 @@
 package vip.maxhub.web.sample.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.authentication.encoding.BasePasswordEncoder;
-import org.springframework.security.authentication.encoding.PlaintextPasswordEncoder;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
 
-import org.springframework.security.core.userdetails.UserDetailsService;
 import vip.maxhub.web.sample.Constants;
-import vip.maxhub.web.sample.security.CustomUserDetailsService;
-import vip.maxhub.web.sample.security.EncryptionUtils;
+import vip.maxhub.web.sample.security.AdminUserDetailsService;
+import vip.maxhub.web.sample.security.SecurityUtils;
 import vip.maxhub.web.sample.security.RestAuthenticationEntryPoint;
 
 
@@ -28,6 +23,9 @@ import vip.maxhub.web.sample.security.RestAuthenticationEntryPoint;
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
+
+    @Autowired
+    private AdminUserDetailsService adminUserDetailsService;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -44,14 +42,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth
-            .userDetailsService(new CustomUserDetailsService())
+            .userDetailsService(adminUserDetailsService)
             .passwordEncoder(passwordEncoder());
     }
 
 
     @Bean
     public BasePasswordEncoder passwordEncoder() {
-        return EncryptionUtils.passwordEncoder();
+        return SecurityUtils.passwordEncoder();
     }
 
 }
