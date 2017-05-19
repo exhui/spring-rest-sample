@@ -231,7 +231,7 @@ IDEA打开工程时会自动提示是否是Maven、是否导入JPA配置文件�
 ### 5. 开发文档
 
 - UML文档用StartUML编写。原始文件在doc_src目录。可直接阅读的格式是JPG图片，在doc目录。不输出PDF，是由于StartUML输出的PDF显示中文乱码。
-- API文档用Swagger自动生成。具体看API编辑指南。
+- API文档用使用Postman导出的文件。`docs_src/spring-rest-sample.postman_collection.json`
 
 ### 6. 运行环境配置
 
@@ -307,9 +307,17 @@ IDEA打开工程时会自动提示是否是Maven、是否导入JPA配置文件�
 
 打开编辑栏最右侧的导航栏，一般被缩略成标签样式。其中有一个标签是`Maven Projects`。打开后，就可以发现配置好的profiles，可以选择自己需要的profile。
 
-## API文档编辑指南
+## Swagger编辑指南
 
-项目推荐使用Swagger自动生成API文档，但不推荐完全依赖Swagger。使用注解做API文档，会导致代码过于复杂。建议步骤如下:
+项目内置Swagger，可以自动生成API文档。
+
+### 不推荐Swagger作为API设计工具
+
+1. Swagger与Postman的结合非常差。Postman虽然支持导入Swagger文件，但不完全兼容Swagger，尤其是解析不了body。
+2. Swagger Editor的文档编辑功能也是非常差，有代码提示，但没有GUI界面。编辑起来，非常得费力。工作效率低下。
+3. Swagger可以作为补充，在没有编写接口协议文档或接口协议文档与实际差异比较大的情况下，可以导出观看实际接口。
+
+建议步骤如下:
 
 ### 1. 在项目中配置Swagger
 
