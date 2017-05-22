@@ -48,7 +48,7 @@ import vip.maxhub.web.sample.Constants;
     }
 )
 
-public class WebConfig extends WebMvcConfigurationSupport {
+public class WebConfig extends WebMvcConfigurerAdapter {
 
     private static final Logger logger = LoggerFactory.getLogger(WebConfig.class);
 
@@ -61,7 +61,8 @@ public class WebConfig extends WebMvcConfigurationSupport {
      */
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-
+        //加入public目录为静态资源目录
+        registry.addResourceHandler("/public/**").addResourceLocations("/public/");
     }
 
     /**
@@ -112,11 +113,6 @@ public class WebConfig extends WebMvcConfigurationSupport {
         return exceptionHandlerExceptionResolver;
     }
 
-    @Override
-    public HandlerExceptionResolver handlerExceptionResolver() {
-        return super.handlerExceptionResolver();
-    }
-
     /**
      * JSON序列化配置
      * @return
@@ -141,4 +137,17 @@ public class WebConfig extends WebMvcConfigurationSupport {
 
         return commonsMultipartResolver;
     }
+
+//    /**
+//     * 设置common-fileupload。奇怪的是，此处设置没有起到效果。
+//     * @return
+//     */
+//    @Bean(name = "multipartResolver")
+//    public CommonsMultipartResolver multipartResolver() throws IOException {
+//
+//        CommonsMultipartResolver resolver = new CommonsMultipartResolver();
+//        resolver.setMaxUploadSize(5242880);//5MB
+//
+//        return resolver;
+//    }
 }

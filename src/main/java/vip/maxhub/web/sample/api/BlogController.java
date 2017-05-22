@@ -14,6 +14,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
+import org.springframework.web.multipart.MultipartFile;
 import vip.maxhub.web.sample.Constants;
 import vip.maxhub.web.sample.exception.ValidationExceptionUtils;
 import vip.maxhub.web.sample.model.Blog;
@@ -116,6 +117,18 @@ public class BlogController {
 
         Boolean success = this.blogService.deleteOneById(id);
         log.debug("deleted a blog ==> " + success);
+
+        return new PrevalentMessage("ok");
+    }
+
+    /**
+     * 插入图片，暂未实现，只是演示文件上传
+     * @param incomingFile
+     * @return
+     */
+    @RequestMapping(value = "/{id}/pic", method = RequestMethod.PATCH)
+    public PrevalentMessage updateUserAvatar(@RequestPart("file") MultipartFile incomingFile) {
+
 
         return new PrevalentMessage("ok");
     }

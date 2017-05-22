@@ -1,6 +1,8 @@
 package vip.maxhub.web.sample.config;
 
 import javax.servlet.Filter;
+import javax.servlet.MultipartConfigElement;
+import javax.servlet.ServletRegistration;
 
 import org.springframework.core.annotation.Order;
 import org.springframework.web.filter.CharacterEncodingFilter;
@@ -75,6 +77,31 @@ public class AppInitializer extends AbstractAnnotationConfigDispatcherServletIni
         encodingFilter.setEncoding("UTF-8");
         encodingFilter.setForceEncoding(true);
 
-        return new Filter[]{encodingFilter, new CORSFilter()};
+        //跨域访问支持
+        Filter corsfilter = new CORSFilter();
+
+        return new Filter[]{encodingFilter, corsfilter};
+    }
+
+    @Override
+    protected void customizeRegistration(ServletRegistration.Dynamic registration) {
+        //增加上传文件的配置
+        registration.setMultipartConfig(getMultipartConfigElement());
+    }
+
+    /**
+     * 原本使用common-fileupload处理文件上传，通过在WebConfig.java中设置CommonsMultipartResolver。
+     * 但是一直没有上传成功。对比样例代码，没有发现错误。检查common-fileupload.jar文件，没有发现遗漏。
+     *
+     * 样例代码是可以上传成功的，但这个项目就是不能成功。这个奇怪的问题，只能在此记录下来。等待有志之士解开谜团。
+     *
+     * @return
+     */
+    private MultipartConfigElement getMultipartConfigElement() {
+
+        MultipartConfigElement multipartConfigElement = new MultipartConfigElement(
+            ""
+        );
+        return multipartConfigElement;
     }
 }
