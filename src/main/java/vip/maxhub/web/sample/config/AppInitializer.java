@@ -38,6 +38,7 @@ public class AppInitializer extends AbstractAnnotationConfigDispatcherServletIni
             JpaConfig.class, //JPA的配置, 使用Hibernate做对象持久化
             DataJpaConfig.class, //JPA数据仓库配置，指定仓库位置
             SecurityConfig.class, //安全管理框架配置
+//            HttpSessionConfig.class, //session配置, 不推荐
         };
     }
 

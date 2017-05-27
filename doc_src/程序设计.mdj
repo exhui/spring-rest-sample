@@ -2806,7 +2806,7 @@
 							"width": 475.2730407714844,
 							"height": 193,
 							"autoResize": false,
-							"text": "整体设计原则\n1. 习惯大于配置。\n取消spring xml、hibernate xml、web.xml等配置数据，用代码描述可配置信息。\n\n2. 面向Rest API设计\n不再提供Servlet+JSP的页面渲染方式。页面渲染交由Node前端服务架构实现。",
+							"text": "整体设计原则\n1. 习惯大于配置。\n取消spring xml、hibernate xml、web.xml等配置数据，用代码描述可配置信息。\n\n2. 面向Rest API设计\n不再提供Servlet+JSP的页面渲染方式。页面渲染交由Node前端服务架构实现。\n\n3. 无记录session\n系统保存session，不支持不建议使用session集群。而是推荐只读取sessionId，\n再把sessionId作为业务对象的属性之一在数据库中处理。",
 							"wordWrap": true
 						},
 						{
@@ -12087,7 +12087,7 @@
 									"width": 415.078125,
 									"height": 137,
 									"autoResize": false,
-									"text": "设计说明\n1. 所有安全配置均在SecurityConfig下配置。\n2. SecurityConfig相关需要注入的实例都在Security目录中。\n3. 如果涉及到数据库的调用，应该直接调用对象持久层，即repository。",
+									"text": "设计说明\n1. 所有安全配置均在SecurityConfig下配置。\n2. SecurityConfig相关需要注入的实例都在Security目录中。\n3. 如果涉及到数据库的调用，应该直接调用对象持久层，即\nrepository。\n4. 如果想启用session，需在此打开，并且在config目录下，\n把相关session配置打开。",
 									"wordWrap": true
 								},
 								{
