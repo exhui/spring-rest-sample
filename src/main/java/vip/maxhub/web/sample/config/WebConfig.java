@@ -1,6 +1,5 @@
 package vip.maxhub.web.sample.config;
 
-import javax.inject.Inject;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -61,8 +60,10 @@ public class WebConfig extends WebMvcConfigurerAdapter {
      */
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        //加入public目录为静态资源目录
-        registry.addResourceHandler("/public/**").addResourceLocations("/public/");
+
+        //加入resources/public目录为静态资源目录
+        registry.addResourceHandler("/public/**")
+            .addResourceLocations("/WEB-INF/resources/public");
     }
 
     /**

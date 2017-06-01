@@ -1,15 +1,12 @@
 package vip.maxhub.web.sample.api;
 
-import javax.inject.Inject;
 import javax.validation.Valid;
 import java.util.List;
 
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiImplicitParam;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
@@ -33,13 +30,17 @@ import vip.maxhub.web.sample.validator.BlogFormValidator;
 public class BlogController {
     private static final Logger log = LoggerFactory.getLogger(BlogController.class);
 
+    @Autowired
+    private SimpMessagingTemplate simpMessagingTemplate;
+
     @InitBinder
     public void initBinder(WebDataBinder binder) {
         binder.addValidators(new BlogFormValidator());
     }
 
-    @Inject
+    @Autowired
     private BlogService blogService;
+
 
     /**
      * 新增
@@ -56,6 +57,8 @@ public class BlogController {
 
         Blog blog = this.blogService.save(form);
         log.debug("created a new blog ==> " + blog);
+
+        this.simpMessagingTemplate.convertAndSend("/topic/blog", blog);
 
         return new PrevalentMessage("ok");
     }
