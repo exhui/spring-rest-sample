@@ -90,6 +90,10 @@ $ sudo ./bin/startup.sh # 启动
 - `+` 号 -> Artifact... -> 选择发布的工程`spring-test-sample`
 - `Application context`，设置为`/sample`。
 
+** 3. 需要安装的第三方插件 **
+
+- `lombok Plugin`, 对象模型定义工具。
+
 ## Mac启用80端口说明
 
 Mac默认禁止1024以下的端口，需要通过PF防火墙配置，添加80端口。
@@ -377,12 +381,6 @@ $ cd swagger-ui
 $ npm install
 $ npm run build
 $ http-server dist
-```
-
-本项目已经编辑完成，所以安装完成后输入地址:
-
-```
-https://raw.githubusercontent.com/lordking/spring-rest-sample/master/doc_src/接口协议.yaml
 ```
 
 如果不想安装，可以使用Swagger官方提供的演示网站打开:
