@@ -222,7 +222,16 @@ IDEA打开工程时会自动提示是否是Maven、是否导入JPA配置文件�
 
 打开后，IDEA会根据pom.xml配置自动导入依赖包。
 
-### 4. 在IDEA下修改包名
+### 4. 在IDEA下修改presistence.xml
+
+修改持久化单元的`name`名称。
+
+```xml
+    <persistence-unit name="samplePU" transaction-type="RESOURCE_LOCAL">
+    </persistence-unit>
+```
+
+### 5. 在IDEA下修改包名
 
 在IDEA下的目录树中，右键选择包`vip.maxhub.web.sample`，弹出右键菜单。点击`Refactor`->`Rename...`修改成自己需要的名称。
 
@@ -232,14 +241,14 @@ IDEA打开工程时会自动提示是否是Maven、是否导入JPA配置文件�
   public static final String BASE_PACKAGE = "vip.maxhub.web.sample";
 ```
 
-### 5. 开发文档
+### 6. 开发文档
 
 - UML文档用StartUML编写。原始文件在doc_src目录。可直接阅读的格式是JPG图片，在doc目录。不输出PDF，是由于StartUML输出的PDF显示中文乱码。
 - API文档用使用Postman导出的文件。`docs_src/spring-rest-sample.postman_collection.json`
 
-### 6. 运行环境配置
+### 7. 运行环境配置
 
-#### 6.1 在代码中使用`@Profile`注解配置
+#### 7.1 在代码中使用`@Profile`注解配置
 
 本项目只配置了一条，可以参考`swaggerConfig.java`。下面含义是只支持开发和测试环境。
 
@@ -247,7 +256,7 @@ IDEA打开工程时会自动提示是否是Maven、是否导入JPA配置文件�
 @Profile(value = {"dev", "staging"})
 ```
 
-#### 6.2 在IDEA选择不同的运行环境
+#### 7.2 在IDEA选择不同的运行环境
 
 一般情况下，我们需要根据不同的运行环境，做不同的资源文件配置。所以在`pom.xml`有如下配置:
 
@@ -307,7 +316,7 @@ IDEA打开工程时会自动提示是否是Maven、是否导入JPA配置文件�
     </profiles>
 ```
 
-#### 6.3 在IDEA选择不同的运行环境
+#### 7.3 在IDEA选择不同的运行环境
 
 打开编辑栏最右侧的导航栏，一般被缩略成标签样式。其中有一个标签是`Maven Projects`。打开后，就可以发现配置好的profiles，可以选择自己需要的profile。
 
