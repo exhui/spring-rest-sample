@@ -14,7 +14,7 @@
 <script language="JavaScript">
 
     var stompClient = null;
-    var socket = new SockJS('http://localhost:8080/sample/socket-port');
+    var socket = new SockJS('http://localhost:8080/sample/socket-js-port');
     stompClient = Stomp.over(socket);
     stompClient.connect({}, function (frame) {
 
