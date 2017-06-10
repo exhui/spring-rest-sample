@@ -21,8 +21,7 @@ import java.io.IOException;
  */
 public class RestAuthenticationEntryPoint implements AuthenticationEntryPoint {
 
-    @Autowired
-    private ObjectMapper objectMapper;
+    private final ObjectMapper objectMapper = new ObjectMapper();
 
     @Override
     public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException authException) throws IOException, ServletException {
