@@ -30,8 +30,8 @@ import vip.maxhub.web.sample.validator.BlogFormValidator;
 public class BlogController {
     private static final Logger log = LoggerFactory.getLogger(BlogController.class);
 
-    @Autowired
-    private SimpMessagingTemplate simpMessagingTemplate;
+//    @Autowired
+//    private SimpMessagingTemplate simpMessagingTemplate;
 
     @InitBinder
     public void initBinder(WebDataBinder binder) {
@@ -58,7 +58,7 @@ public class BlogController {
         Blog blog = this.blogService.save(form);
         log.debug("created a new blog ==> " + blog);
 
-        this.simpMessagingTemplate.convertAndSend("/topic/blog", blog);
+//        this.simpMessagingTemplate.convertAndSend("/topic/blog", blog);
 
         return new PrevalentMessage("ok");
     }
