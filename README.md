@@ -399,3 +399,12 @@ http://petstore.swagger.io
 ```
 
 用Chrome 打开地址。由于Tomcat占用了8080端口，本机启动时会自动改为8081端口。
+
+### 5. 单元测试
+
+#### 5.1 在IDEA中设置单元测试
+
+单元测试目录是`src\test`，选择`test`目录下的`java`。再点击右键`Mark Directory as`，选择
+`Test Resources Root`。
+
+设置成功后，选择任意一个单元测试代码，点击右键即可看见`Run...`和`Debug...`。运行或调试单元测试代码。
