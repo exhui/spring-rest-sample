@@ -210,10 +210,7 @@
             <artifactId>spring-security-cas</artifactId>
             <version>${springframework.security.version}</version>
         </dependency>
-        <dependency>
-            <groupId>org.jasig.cas</groupId>
-            <artifactId>cas-client-core</artifactId>
-        </dependency>
+
 
         <!-- Spring Session (deprecation)  -->
 
@@ -438,12 +435,6 @@
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>org.mockito</groupId>
-            <artifactId>mockito-core</artifactId>
-            <version>1.10.19</version>
         </dependency>
 
     </dependencies>

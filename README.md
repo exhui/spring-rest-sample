@@ -179,7 +179,7 @@ log4j的日志配置文件。
 
 
 ```bash
-$ mvn clean install -Pdev
+$ mvn clean install -Pdev -Dmaven.test.skip=true
 ```
 
 ### 测试环境
@@ -187,7 +187,7 @@ $ mvn clean install -Pdev
 项目没有配置测试环境的资源配置目录，所以需要复制一份开发环境的资源文件目录`resources`，改为`resources-staging`
 
 ```bash
-$ mvn clean install -Pstaging
+$ mvn clean install -Pstaging -Dmaven.test.skip=true
 ```
 
 ### 生产环境
@@ -195,7 +195,7 @@ $ mvn clean install -Pstaging
 项目没有配置测试环境的资源配置目录，所以需要复制一份开发环境的资源文件目录`resources`，改为`resources-prod`
 
 ```bash
-$ mvn clean install -Pprod
+$ mvn clean install -Pprod -Dmaven.test.skip=true
 ```
 
 ## 快速开发指南
