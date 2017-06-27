@@ -33,11 +33,10 @@ public class GlobalExceptionHandler {
      */
     @ExceptionHandler(value = {Exception.class, RuntimeException.class})
     public ResponseEntity<ErrorResponse> handleGenericException(Exception ex, WebRequest request) {
-        if (log.isDebugEnabled()) {
-            log.warn("exception class ==> " + ex.getClass().getName());
-            log.warn("handling exception ==> " + request.getDescription(true));
-            ex.printStackTrace();
-        }
+        log.error("exception class ==> " + ex.getClass().getName());
+        log.error("handling exception ==> " + request.getDescription(true));
+        log.error("exception message ==> " + ex.getLocalizedMessage());
+        ex.printStackTrace();
 
         RestException rex = new RestException(SYSTEM_FAIL);
         ErrorResponse res = new ErrorResponse(rex);
@@ -56,8 +55,9 @@ public class GlobalExceptionHandler {
         HttpMessageNotReadableException.class,
         MethodArgumentTypeMismatchException.class})
     public ResponseEntity<ErrorResponse> handleRequestArgumentException(Exception ex, WebRequest request) {
+
         if (log.isDebugEnabled()) {
-            log.debug("handling exception...", request);
+            log.debug("handling exception ==> " + request.getDescription(true));
         }
 
         RestException rex = new RestException(PARAMS_RESOLUTION_ERROR, ex.getLocalizedMessage());
@@ -75,8 +75,9 @@ public class GlobalExceptionHandler {
      */
     @ExceptionHandler(value = {JpaSystemException.class})
     public ResponseEntity<ErrorResponse> handleJpaException(Exception ex, WebRequest request) {
+
         if (log.isDebugEnabled()) {
-            log.debug("handling exception...", request);
+            log.debug("handling exception ==> " + request.getDescription(true));
         }
 
         RestException rex = new RestException(PARAMS_RESOLUTION_ERROR, ex.getLocalizedMessage());
@@ -93,6 +94,7 @@ public class GlobalExceptionHandler {
      */
     @ExceptionHandler(RestException.class)
     public ResponseEntity<ErrorResponse> handleRestException(RestException ex) {
+
         ErrorResponse res = new ErrorResponse(ex);
         return new ResponseEntity<>(res, ex.getHttpStatus());
     }
