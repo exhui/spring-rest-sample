@@ -514,7 +514,7 @@
             <id>staging</id>
             <properties>
                 <log4j.level>DEBUG</log4j.level>
-                <spring.profiles.active>dev</spring.profiles.active>
+                <spring.profiles.active>staging</spring.profiles.active>
             </properties>
             <build>
                 <resources>
@@ -530,7 +530,7 @@
             <id>prod</id>
             <properties>
                 <log4j.level>INFO</log4j.level>
-                <spring.profiles.active>dev</spring.profiles.active>
+                <spring.profiles.active>prod</spring.profiles.active>
             </properties>
             <build>
                 <resources>
